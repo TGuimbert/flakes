@@ -51,7 +51,7 @@
                       package = pythonEnv;
                       venv = {
                         enable = true;
-                        requirements = builtins.readFile ./requirements.txt;
+                        # requirements = builtins.readFile ./requirements.txt;
                       };
                     };
                   };
