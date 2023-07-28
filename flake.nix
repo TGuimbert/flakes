@@ -63,6 +63,7 @@
                     pre-commit
                     ruff
                     protobuf
+                    protoc-gen-doc
                     buf
                   ];
 
