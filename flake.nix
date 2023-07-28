@@ -62,7 +62,7 @@
                   packages = with pkgs; [
                     pre-commit
                     ruff
-                    protoc
+                    protobuf
                     buf
                   ];
 
