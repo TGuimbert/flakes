@@ -5,7 +5,7 @@
     devenv.url = "github:cachix/devenv";
   };
 
-  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
+  outputs = { nixpkgs, devenv, systems, ... } @ inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
     in
@@ -14,12 +14,12 @@
         (system:
           let
             pkgs = nixpkgs.legacyPackages.${system};
-            pythonEnv = pkgs.python311.withPackages(ps: with ps; [
+            pythonEnv = pkgs.python311.withPackages (ps: with ps; [
               python-lsp-server
               python-lsp-ruff
               pylsp-mypy
             ]);
-            mypyEnv = pkgs.python310.withPackages(ps: [ ps.mypy ps.types-requests]);
+            mypyEnv = pkgs.python310.withPackages (ps: [ ps.mypy ps.types-requests ]);
           in
           {
             default = devenv.lib.mkShell {
@@ -35,6 +35,9 @@
                   pre-commit = {
                     hooks = {
                       actionlint.enable = true;
+                      deadnix.enable = true;
+                      nixpkgs-fmt.enable = true;
+                      statix.enable = true;
                     };
                   };
                 }
@@ -59,6 +62,7 @@
                   packages = with pkgs; [
                     pre-commit
                     ruff
+                    buf
                   ];
 
                   pre-commit = {
