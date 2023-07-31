@@ -60,6 +60,7 @@
                   };
 
                   packages = with pkgs; [
+                    gnumake
                     pre-commit
                     ruff
                     protobuf
