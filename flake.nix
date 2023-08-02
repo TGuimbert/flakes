@@ -66,6 +66,7 @@
                     protobuf
                     protoc-gen-doc
                     buf
+                    skaffold
                   ];
 
                   pre-commit = {
