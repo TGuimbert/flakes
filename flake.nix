@@ -14,7 +14,7 @@
         (system:
           let
             pkgs = nixpkgs.legacyPackages.${system};
-            pythonEnv = pkgs.python311.withPackages (ps: with ps; [
+            pythonEnv = pkgs.python310.withPackages (ps: with ps; [
               python-lsp-server
               python-lsp-ruff
               pylsp-mypy
