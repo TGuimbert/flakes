@@ -54,7 +54,7 @@
                       package = pythonEnv;
                       venv = {
                         enable = true;
-                        # requirements = builtins.readFile ./requirements.txt;
+                        # requirements = "requirements.txt";
                       };
                     };
                   };
@@ -81,6 +81,43 @@
                     settings = {
                       mypy.binPath = "${mypyEnv}/bin/mypy";
                     };
+                  };
+                }
+              ];
+            };
+            infra = devenv.lib.mkShell {
+              inherit inputs pkgs;
+              modules = [
+                {
+                  # https://devenv.sh/reference/options/
+                  packages = with pkgs; [
+                    gnumake
+                    jq
+                    yq-go
+                    wget
+                    xz
+                  ];
+
+                  languages = {
+                    terraform.enable = true;
+                    nix.enable = true;
+                    python = {
+                      enable = true;
+                      package = pythonEnv;
+                      venv.enable = true;
+                    };
+                  };
+
+                  pre-commit.hooks = {
+                    ansible-lint.enable = true;
+                    terraform-format.enable = true;
+                    actionlint.enable = true;
+                    yamllint.enable = true;
+                    ruff.enable = true;
+                    autoflake.enable = true;
+                    black.enable = true;
+                    isort.enable = true;
+                    mypy.enable = true;
                   };
                 }
               ];
