@@ -67,6 +67,7 @@
                     protoc-gen-doc
                     buf
                     skaffold
+                    yq
                   ];
 
                   pre-commit = {
